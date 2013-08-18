@@ -1,6 +1,6 @@
 == twilio
 
-Twilio bindings
+Bindings to the Twilio API
 [[toc:]]
 === {{twilio-sid}}
 <parameter>twilio-sid → (get-environment-variable TWILIO_SID)</parameter>
