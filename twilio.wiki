@@ -1,0 +1,25 @@
+== twilio
+
+Twilio bindings
+[[toc:]]
+=== {{twilio-sid}}
+<parameter>twilio-sid → (get-environment-variable TWILIO_SID)</parameter>
+
+<enscript highlight="scheme">(define twilio-sid (make-parameter (get-environment-variable "TWILIO_SID")))
+</enscript>
+=== About this egg
+
+==== Author
+
+[[/users/klutometis|Peter Danenberg]]
+==== Repository
+[[https://github.com/klutometis/twilio]]
+==== License
+BSD
+==== Dependencies
+* [[setup-helper]]
+
+
+==== Colophon
+
+Documented by [[/egg/cock|cock]].
