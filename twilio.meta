@@ -1,0 +1,7 @@
+((synopsis "Bindings to the Twilio API")
+ (author "Peter Danenberg")
+ (category net)
+ (license "BSD")
+ (depends setup-helper)
+ (test-depends)
+ (foreign-depends))

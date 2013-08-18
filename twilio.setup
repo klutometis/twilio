@@ -1,0 +1,11 @@
+(include "setup-helper")
+
+(verify-extension-name "twilio")
+
+(setup-shared-extension-module
+ 'twilio
+ (extension-version "0.1")
+ compile-options: '(-X cock))
+
+(run (cock -o twilio.wiki twilio.scm twilio-core.scm "||"
+           echo cock-utils not "installed:" not creating documentation))

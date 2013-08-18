@@ -1,0 +1,6 @@
+@(egg "twilio")
+@(description "Twilio bindings")
+@(author "Peter Danenberg")
+@(email "pcd@roxygen.org")
+@(username "klutometis")
+@(noop)
