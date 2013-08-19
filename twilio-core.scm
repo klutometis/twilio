@@ -1,3 +1,20 @@
+@(heading "Abstract")
+
+@(text "[[http://www.twilio.com/|Twilio]] allows one to send SMSes and
+place calls using their API; and the {{twilio}} egg requires at least three
+pieces of information to do so:
+
+* The account SID
+* The auth token
+* The from number
+
+They are populated initially from the environment
+variables {{TWILIO_SID}}, {{TWILIO_AUTH}}, {{TWILIO_FROM}};
+respectively. It is also possible to set the dynamic
+parameters {{twilio-sid}},{{twilio-auth}}, {{twilio-from}}.")
+
+@(heading "Documentation")
+
 (define twilio-sid
   @("The Twilio account SID")
   (make-parameter (get-environment-variable "TWILIO_SID")))
@@ -38,7 +55,7 @@
                           if-machine
                           timeout
                           record)
-  @("Make a call using the Twilio API; see [[http://www.twilio.com/docs/api/rest/making-calls]]."
+  @("Make a call using the Twilio API; see [[http://www.twilio.com/docs/api/rest/making-calls]]." ;
     (to "The phone number to call")
     (url "TwiML URL when the call connects")
     (application-sid "Alternatively, the app containing the URL")

@@ -2,28 +2,45 @@
 
 Bindings to the Twilio API
 [[toc:]]
-=== {{twilio-sid}}
+=== Abstract
+[[http://www.twilio.com/|Twilio]] allows one to send SMSes and
+place calls using their API; the {{twilio}} egg requires at least three
+pieces of information to do so:
+
+* The account SID
+* The auth token
+* The from number
+
+They are populated initially from the environment
+variables {{TWILIO_SID}}, {{TWILIO_AUTH}}, {{TWILIO_FROM}};
+respectively. It is also possible to set the dynamic
+parameters {{twilio-sid}},{{twilio-auth}}, {{twilio-from}}
+directly.
+
+
+=== Documentation
+==== {{twilio-sid}}
 <parameter>twilio-sid → (get-environment-variable TWILIO_SID)</parameter>
 The Twilio account SID
 <enscript highlight="scheme">(define twilio-sid (make-parameter (get-environment-variable "TWILIO_SID")))
 </enscript>
-=== {{twilio-auth}}
+==== {{twilio-auth}}
 <parameter>twilio-auth → (get-environment-variable TWILIO_AUTH)</parameter>
 The Twilio auth token
 <enscript highlight="scheme">(define twilio-auth (make-parameter (get-environment-variable "TWILIO_AUTH")))
 </enscript>
-=== {{twilio-from}}
+==== {{twilio-from}}
 <parameter>twilio-from → (get-environment-variable TWILIO_FROM)</parameter>
 The phone number from which to post
 <enscript highlight="scheme">(define twilio-from (make-parameter (get-environment-variable "TWILIO_FROM")))
 </enscript>
-=== {{twilio-url}}
+==== {{twilio-url}}
 <parameter>twilio-url → https://~a:~a@api.twilio.com/2010-04-01/Accounts/~a/~a</parameter>
 The Twilio API URL
 <enscript highlight="scheme">(define twilio-url
   (make-parameter "https://~a:~a@api.twilio.com/2010-04-01/Accounts/~a/~a"))
 </enscript>
-=== {{twilio-make-call}}
+==== {{twilio-make-call}}
 <procedure>(twilio-make-call to #!key url application-sid method fallback-url fallback-method status-callback status-callback-method send-digits if-machine timeout record) → unspecified</procedure>
 Make a call using the Twilio API; see [[http://www.twilio.com/docs/api/rest/making-calls]].
 ; to : The phone number to call
@@ -71,10 +88,10 @@ Make a call using the Twilio API; see [[http://www.twilio.com/docs/api/rest/maki
       (camel-filter-parameters parameters)
       void)))
 </enscript>
-==== Examples
+===== Examples
 Placing a call
  (twilio-make-call "+14158141829" url: "http://example.com/twiml.scm")
-=== {{twilio-send-sms}}
+==== {{twilio-send-sms}}
 <procedure>(twilio-send-sms to body #!key status-callback application-sid) → unspecified</procedure>
 Send an SMS using the Twilio API; see [[http://www.twilio.com/docs/api/rest/sending-sms]].
 ; to : The number to send to
@@ -93,7 +110,7 @@ Send an SMS using the Twilio API; see [[http://www.twilio.com/docs/api/rest/send
       (camel-filter-parameters parameters)
       void)))
 </enscript>
-==== Examples
+===== Examples
 Sending an SMS
  (twilio-send-sms "+14158141829"
                   "If you wish to make an apple pie from scratch, you must first invent the universe.")
