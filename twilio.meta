@@ -5,6 +5,10 @@
  (repository "https://github.com/klutometis/twilio")
  (category net)
  (license "BSD")
- (depends setup-helper)
+ (depends debug
+          http-client
+          matchable
+          s
+          setup-helper)
  (test-depends)
  (foreign-depends))
