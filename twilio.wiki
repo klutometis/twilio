@@ -4,9 +4,99 @@ Bindings to the Twilio API
 [[toc:]]
 === {{twilio-sid}}
 <parameter>twilio-sid → (get-environment-variable TWILIO_SID)</parameter>
-
+The Twilio account SID
 <enscript highlight="scheme">(define twilio-sid (make-parameter (get-environment-variable "TWILIO_SID")))
 </enscript>
+=== {{twilio-auth}}
+<parameter>twilio-auth → (get-environment-variable TWILIO_AUTH)</parameter>
+The Twilio auth token
+<enscript highlight="scheme">(define twilio-auth (make-parameter (get-environment-variable "TWILIO_AUTH")))
+</enscript>
+=== {{twilio-from}}
+<parameter>twilio-from → (get-environment-variable TWILIO_FROM)</parameter>
+The phone number from which to post
+<enscript highlight="scheme">(define twilio-from (make-parameter (get-environment-variable "TWILIO_FROM")))
+</enscript>
+=== {{twilio-url}}
+<parameter>twilio-url → https://~a:~a@api.twilio.com/2010-04-01/Accounts/~a/~a</parameter>
+The Twilio API URL
+<enscript highlight="scheme">(define twilio-url
+  (make-parameter "https://~a:~a@api.twilio.com/2010-04-01/Accounts/~a/~a"))
+</enscript>
+=== {{twilio-make-call}}
+<procedure>(twilio-make-call to #!key url application-sid method fallback-url fallback-method status-callback status-callback-method send-digits if-machine timeout record) → unspecified</procedure>
+Make a call using the Twilio API; see [[http://www.twilio.com/docs/api/rest/making-calls]].
+; to : The phone number to call
+; url : TwiML URL when the call connects
+; application-sid : Alternatively, the app containing the URL
+; method : Method to request {{url}}
+; fallback-url : Second {{url}} to try
+; fallback-method : Method to which to fall back
+; status-callback : URL to post status to
+; status-callback-method : Method to use
+; send-digits : Keys to dial after connecting
+; if-machine : Determine whether the caller is a machine
+; timeout : How long to let the phone ring
+; record : Whether to record the call
+<enscript highlight="scheme">(define (twilio-make-call
+         to
+         #!key
+         url
+         application-sid
+         method
+         fallback-url
+         fallback-method
+         status-callback
+         status-callback-method
+         send-digits
+         if-machine
+         timeout
+         record)
+  (let* ((parameters
+           `((from unquote (twilio-from))
+             (to unquote to)
+             (url unquote url)
+             (application-sid unquote application-sid)
+             (method unquote method)
+             (fallback-url unquote fallback-url)
+             (fallback-method unquote fallback-method)
+             (status-callback unquote status-callback)
+             (status-callback-method unquote status-callback-method)
+             (send-digits unquote send-digits)
+             (if-machine unquote if-machine)
+             (timeout unquote timeout)
+             (record unquote record))))
+    (with-input-from-request
+      (twilio-url-calls)
+      (camel-filter-parameters parameters)
+      void)))
+</enscript>
+==== Examples
+Placing a call
+ (twilio-make-call "+14158141829" url: "http://example.com/twiml.scm")
+=== {{twilio-send-sms}}
+<procedure>(twilio-send-sms to body #!key status-callback application-sid) → unspecified</procedure>
+Send an SMS using the Twilio API; see [[http://www.twilio.com/docs/api/rest/sending-sms]].
+; to : The number to send to
+; body : The SMS to send
+; status-callback : POST when the message is processed
+; application-sid : The application's SID
+<enscript highlight="scheme">(define (twilio-send-sms to body #!key status-callback application-sid)
+  (let* ((parameters
+           `((from unquote (twilio-from))
+             (to unquote to)
+             (body unquote body)
+             (status-callback unquote status-callback)
+             (application-sid unquote application-sid))))
+    (with-input-from-request
+      (twilio-url-sms)
+      (camel-filter-parameters parameters)
+      void)))
+</enscript>
+==== Examples
+Sending an SMS
+ (twilio-send-sms "+14158141829"
+                  "If you wish to make an apple pie from scratch, you must first invent the universe.")
 === About this egg
 
 ==== Author
@@ -17,6 +107,10 @@ Bindings to the Twilio API
 ==== License
 BSD
 ==== Dependencies
+* [[debug]]
+* [[http-client]]
+* [[matchable]]
+* [[s]]
 * [[setup-helper]]
 
 
