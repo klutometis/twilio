@@ -113,7 +113,8 @@ BSD
 * [[s]]
 * [[setup-helper]]
 
-
+==== Versions
+; 0.1 : First release: calls and SMS
 ==== Colophon
 
 Documented by [[/egg/cock|cock]].
