@@ -4,7 +4,7 @@ Bindings to the Twilio API
 [[toc:]]
 === Abstract
 [[http://www.twilio.com/|Twilio]] allows one to send SMSes and
-place calls using their API; the {{twilio}} egg requires at least three
+place calls using their API; and the {{twilio}} egg requires at least three
 pieces of information to do so:
 
 * The account SID
@@ -14,8 +14,7 @@ pieces of information to do so:
 They are populated initially from the environment
 variables {{TWILIO_SID}}, {{TWILIO_AUTH}}, {{TWILIO_FROM}};
 respectively. It is also possible to set the dynamic
-parameters {{twilio-sid}},{{twilio-auth}}, {{twilio-from}}
-directly.
+parameters {{twilio-sid}},{{twilio-auth}}, {{twilio-from}}.
 
 
 === Documentation
