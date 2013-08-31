@@ -1,3 +1,21 @@
+* TODO Finish up the other Twilio verbs.
+  - +[[http://www.twilio.com/docs/api/2010-04-01/twiml/say][Say]]+
+  - +[[http://www.twilio.com/docs/api/2010-04-01/twiml/play][Play]]+
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/gather][Gather]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/record][Record]]
+  - +[[http://www.twilio.com/docs/api/2010-04-01/twiml/sms][Sms]]+
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/dial][Dial]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/number][Number]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/sip][Sip]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/client][Client]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/conference][Conference]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/queue][Queue]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/enqueue][Enqueue]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/leave][Leave]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/hangup][Hangup]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/redirect][Redirect]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/reject][Reject]]
+  - [[http://www.twilio.com/docs/api/2010-04-01/twiml/pause][Pause]]
 * TODO Abstract the Twilio methods with a macro.
   There appears to be a pattern using required variables and
   keyword-based optional ones, plus =camel-filter=.
