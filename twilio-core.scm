@@ -136,3 +136,30 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
 (define (twilio-response . verbs)
   `(Response ,@verbs))
 
+(define (twilio-say text #!key voice loop language)
+  (let ((parameters `((voice ,voice)
+                      (loop ,loop)
+                      (language ,language))))
+    `(Say
+      (,(string->symbol "@")
+       ,@(lower-camel-filter-parameters parameters))
+      ,text)))
+
+(define (twilio-play url #!key loop)
+  (let ((parameters `((loop ,loop))))
+    `(Play
+      (,(string->symbol "@")
+       ,@(lower-camel-filter-parameters parameters))
+      ,url)))
+
+(define (twilio-sms text #!key to from action method status-callback)
+  (let ((parameters `((to ,to)
+                      (from ,from)
+                      (action ,action)
+                      (method ,method)
+                      (status-callback ,status-callback))))
+    `(Sms
+      (,(string->symbol "@")
+       ,@(lower-camel-filter-parameters parameters)
+       text))))
+
