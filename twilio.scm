@@ -15,6 +15,9 @@
           data-structures
           scheme)
 
+  (require-library htmlprag)
+  (import (only htmlprag write-shtml-as-html))
+  
   (use debug
        extras
        http-client
