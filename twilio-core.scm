@@ -130,3 +130,6 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
      (twilio-url-sms)
      (upper-camel-filter-parameters parameters)
      void)))
+
+(define twilio-write write-shtml-as-html)
+
