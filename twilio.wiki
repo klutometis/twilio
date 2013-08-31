@@ -14,7 +14,7 @@ pieces of information to do so:
 They are populated initially from the environment
 variables {{TWILIO_SID}}, {{TWILIO_AUTH}}, {{TWILIO_FROM}};
 respectively. It is also possible to set the dynamic
-parameters {{twilio-sid}},{{twilio-auth}}, {{twilio-from}}.
+parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.
 
 
 === Documentation
@@ -68,23 +68,23 @@ Make a call using the Twilio API; see [[http://www.twilio.com/docs/api/rest/maki
          if-machine
          timeout
          record)
-  (let* ((parameters
-           `((from unquote (twilio-from))
-             (to unquote to)
-             (url unquote url)
-             (application-sid unquote application-sid)
-             (method unquote method)
-             (fallback-url unquote fallback-url)
-             (fallback-method unquote fallback-method)
-             (status-callback unquote status-callback)
-             (status-callback-method unquote status-callback-method)
-             (send-digits unquote send-digits)
-             (if-machine unquote if-machine)
-             (timeout unquote timeout)
-             (record unquote record))))
+  (let ((parameters
+          `((from unquote (twilio-from))
+            (to unquote to)
+            (url unquote url)
+            (application-sid unquote application-sid)
+            (method unquote method)
+            (fallback-url unquote fallback-url)
+            (fallback-method unquote fallback-method)
+            (status-callback unquote status-callback)
+            (status-callback-method unquote status-callback-method)
+            (send-digits unquote send-digits)
+            (if-machine unquote if-machine)
+            (timeout unquote timeout)
+            (record unquote record))))
     (with-input-from-request
       (twilio-url-calls)
-      (camel-filter-parameters parameters)
+      (upper-camel-filter-parameters parameters)
       void)))
 </enscript>
 ===== Examples
@@ -98,15 +98,15 @@ Send an SMS using the Twilio API; see [[http://www.twilio.com/docs/api/rest/send
 ; status-callback : POST when the message is processed
 ; application-sid : The application's SID
 <enscript highlight="scheme">(define (twilio-send-sms to body #!key status-callback application-sid)
-  (let* ((parameters
-           `((from unquote (twilio-from))
-             (to unquote to)
-             (body unquote body)
-             (status-callback unquote status-callback)
-             (application-sid unquote application-sid))))
+  (let ((parameters
+          `((from unquote (twilio-from))
+            (to unquote to)
+            (body unquote body)
+            (status-callback unquote status-callback)
+            (application-sid unquote application-sid))))
     (with-input-from-request
       (twilio-url-sms)
-      (camel-filter-parameters parameters)
+      (upper-camel-filter-parameters parameters)
       void)))
 </enscript>
 ===== Examples
@@ -124,6 +124,7 @@ Sending an SMS
 BSD
 ==== Dependencies
 * [[debug]]
+* [[htmlprag]]
 * [[http-client]]
 * [[matchable]]
 * [[s]]
