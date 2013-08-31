@@ -105,7 +105,7 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
                       (record . ,record))))
     (with-input-from-request
      (twilio-url-calls)
-     (camel-filter-parameters parameters)
+     (upper-camel-filter-parameters parameters)
      void)))
 
 (define (twilio-send-sms to
@@ -128,5 +128,5 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
                       (application-sid . ,application-sid))))
     (with-input-from-request
      (twilio-url-sms)
-     (camel-filter-parameters parameters)
+     (upper-camel-filter-parameters parameters)
      void)))
