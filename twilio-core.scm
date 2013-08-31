@@ -37,10 +37,29 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
 (define (twilio-url-sms)
   (format (twilio-url) (twilio-sid) (twilio-auth) (twilio-sid) "/SMS/Messages"))
 
-(define (camel-filter-parameters parameters)
-  (map (match-lambda ((key . value)
-                 (cons (s-upper-camel-case (symbol->string key)) value)))
-       (filter cdr parameters)))
+(define (filter-parameters parameters)
+  (filter (match-lambda
+            ;; These are SHTML attributes: (<symbol> <string>).
+            ((key value) value)
+            ;; These are POST parameters: (<string> . <string>).
+            ((key . value) value))
+          parameters))
+
+(define (case-map-parameters map-case parameters)
+  (map (match-lambda
+         ;; These are SHTML attributes: (<symbol> <string>).
+         ((key value)
+          (list (string->symbol (map-case (symbol->string key))) value))
+         ;; These are POST parameters: (<string> . <string>).
+         ((key . value)
+          (cons (map-case (symbol->string key)) value)))
+       parameters))
+
+(define (upper-camel-filter-parameters parameters)
+  (case-map-parameters s-upper-camel-case (filter-parameters parameters)))
+
+(define (lower-camel-filter-parameters parameters)
+  (case-map-parameters s-lower-camel-case (filter-parameters parameters)))
 
 (define (twilio-make-call to
                           #!key
