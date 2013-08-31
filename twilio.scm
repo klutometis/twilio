@@ -4,7 +4,12 @@
    twilio-from
    twilio-url
    twilio-make-call
-   twilio-send-sms)
+   twilio-send-sms
+   twilio-write
+   twilio-response
+   twilio-say
+   twilio-play
+   twilio-sms)
 
   (import chicken
           data-structures
