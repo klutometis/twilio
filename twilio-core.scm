@@ -11,7 +11,7 @@ pieces of information to do so:
 They are populated initially from the environment
 variables {{TWILIO_SID}}, {{TWILIO_AUTH}}, {{TWILIO_FROM}};
 respectively. It is also possible to set the dynamic
-parameters {{twilio-sid}},{{twilio-auth}}, {{twilio-from}}.")
+parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
 
 @(heading "Documentation")
 
