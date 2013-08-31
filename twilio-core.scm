@@ -132,7 +132,7 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
      void)))
 
 (define twilio-write
-  @("Write a Twilio responsea as TwiML."
+  @("Write STwiML as TwiML."
     (response "The STwiML response"))
   write-shtml-as-html)
 
