@@ -133,3 +133,6 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
 
 (define twilio-write write-shtml-as-html)
 
+(define (twilio-response . verbs)
+  `(Response ,@verbs))
+
