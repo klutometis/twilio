@@ -149,24 +149,30 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
     (loop "How many times to say it")
     (language "The language to say it in")
     (@to "STwiML"))
-  (let ((parameters `((voice ,voice)
-                      (loop ,loop)
-                      (language ,language))))
-    `(Say
-      (,(string->symbol "@")
-       ,@(lower-camel-filter-parameters parameters))
-      ,text)))
+  (let ((parameters (lower-camel-filter-parameters
+                     `((voice ,voice)
+                       (loop ,loop)
+                       (language ,language)))))
+    (if (null? parameters)
+        `(Say ,text)
+        `(Say
+          (,(string->symbol "@")
+           ,@(lower-camel-filter-parameters parameters))
+          ,text))))
 
 (define (twilio-play url #!key loop)
   @("Play something; see [[http://www.twilio.com/docs/api/twiml/play]]."
     (url "The audio file to play")
     (loop "How many times to play it")
     (@to "STwiML"))
-  (let ((parameters `((loop ,loop))))
-    `(Play
-      (,(string->symbol "@")
-       ,@(lower-camel-filter-parameters parameters))
-      ,url)))
+  (let ((parameters (lower-camel-filter-parameters
+                     `((loop ,loop)))))
+    (if (null? parameters)
+        `(Play ,url)
+        `(Play
+          (,(string->symbol "@")
+           ,@(lower-camel-filter-parameters parameters))
+          ,url))))
 
 (define (twilio-sms text #!key to from action method status-callback)
   @("Send an SMS; see [[http://www.twilio.com/docs/api/twiml/sms]]."
@@ -177,13 +183,14 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
     (method "{{POST}} or {{GET}} for {{action}}")
     (status-callback "Status callback URL")
     (@to "STwiML"))
-  (let ((parameters `((to ,to)
-                      (from ,from)
-                      (action ,action)
-                      (method ,method)
-                      (status-callback ,status-callback))))
-    `(Sms
-      (,(string->symbol "@")
-       ,@(lower-camel-filter-parameters parameters)
-       text))))
-
+  (let* ((parameters (lower-camel-filter-parameters
+                      `((to ,to)
+                        (from ,from)
+                        (action ,action)
+                        (method ,method)
+                        (status-callback ,status-callback)))))
+    (if (null? parameters)
+        `(Sms ,text)
+        `(Sms (,(string->symbol "@")
+               ,@(lower-camel-filter-parameters parameters))
+              ,text))))
