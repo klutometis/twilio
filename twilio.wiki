@@ -115,7 +115,7 @@ Sending an SMS
                   "If you wish to make an apple pie from scratch, you must first invent the universe.")
 ==== {{twilio-write}}
 <procedure>(twilio-write response) → unspecified</procedure>
-Write a Twilio responsea as TwiML.
+Write STwiML as TwiML.
 ; response : The STwiML response
 <enscript highlight="scheme">(define twilio-write write-shtml-as-html)
 </enscript>
