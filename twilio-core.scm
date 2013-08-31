@@ -131,12 +131,24 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
      (upper-camel-filter-parameters parameters)
      void)))
 
-(define twilio-write write-shtml-as-html)
+(define twilio-write
+  @("Write a Twilio responsea as TwiML."
+    (response "The STwiML response"))
+  write-shtml-as-html)
 
 (define (twilio-response . verbs)
+  @("Wrap verbs in a STwiML response; see [[http://www.twilio.com/docs/api/twiml]]."
+    (verbs "The verbs to wrap in a response")
+    (@to "STwiML"))
   `(Response ,@verbs))
 
 (define (twilio-say text #!key voice loop language)
+  @("Say something; see [[http://www.twilio.com/docs/api/twiml/say]]."
+    (text "The text to say")
+    (voice "The voice to say it in")
+    (loop "How many times to say it")
+    (language "The language to say it in")
+    (@to "STwiML"))
   (let ((parameters `((voice ,voice)
                       (loop ,loop)
                       (language ,language))))
@@ -146,6 +158,10 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
       ,text)))
 
 (define (twilio-play url #!key loop)
+  @("Play something; see [[http://www.twilio.com/docs/api/twiml/play]]."
+    (url "The audio file to play")
+    (loop "How many times to play it")
+    (@to "STwiML"))
   (let ((parameters `((loop ,loop))))
     `(Play
       (,(string->symbol "@")
@@ -153,6 +169,14 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
       ,url)))
 
 (define (twilio-sms text #!key to from action method status-callback)
+  @("Send an SMS; see [[http://www.twilio.com/docs/api/twiml/sms]]."
+    (text "The text to send")
+    (to "The number to send it to")
+    (from "The number to send it from")
+    (action "Action URL")
+    (method "{{POST}} or {{GET}} for {{action}}")
+    (status-callback "Status callback URL")
+    (@to "STwiML"))
   (let ((parameters `((to ,to)
                       (from ,from)
                       (action ,action)
