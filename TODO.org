@@ -19,3 +19,5 @@
 * TODO Abstract the Twilio methods with a macro.
   There appears to be a pattern using required variables and
   keyword-based optional ones, plus =camel-filter=.
+* TODO Also allow arbitrary parameters to be passed in.
+  That way, we don’t have to maintain lock-step with Twilio’s API.
