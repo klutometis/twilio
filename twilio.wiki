@@ -196,9 +196,9 @@ BSD
 * [[setup-helper]]
 
 ==== Versions
-; 0.1 : First release: calls and SMS
-; 0.2 : Some Twilio verbs
-; 0.2.1 : Accomodate no parameters.
+; [[https://github.com/klutometis/twilio/releases/tag/0.1|0.1]] : First release: calls and SMS
+; [[https://github.com/klutometis/twilio/releases/tag/0.2|0.2]] : Some Twilio verbs
+; [[https://github.com/klutometis/twilio/releases/tag/0.2.1|0.2.1]] : Accomodate no parameters.
 ==== Colophon
 
 Documented by [[/egg/cock|cock]].

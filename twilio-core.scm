@@ -191,6 +191,7 @@ parameters {{twilio-sid}}, {{twilio-auth}}, {{twilio-from}}.")
                         (status-callback ,status-callback)))))
     (if (null? parameters)
         `(Sms ,text)
+        ;; TODO: Use cock::at instead of this string->symbol hack.
         `(Sms (,(string->symbol "@")
                ,@(lower-camel-filter-parameters parameters))
               ,text))))
