@@ -18,8 +18,7 @@
   (require-library htmlprag)
   (import (only htmlprag write-shtml-as-html))
   
-  (use debug
-       extras
+  (use extras
        http-client
        matchable
        s

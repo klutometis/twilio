@@ -5,8 +5,7 @@
  (repository "https://github.com/klutometis/twilio")
  (category net)
  (license "BSD")
- (depends debug
-          htmlprag
+ (depends htmlprag
           http-client
           matchable
           s
