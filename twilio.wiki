@@ -186,7 +186,7 @@ Send an SMS; see [[http://www.twilio.com/docs/api/twiml/sms]].
 ==== License
 BSD
 ==== Dependencies
-* [[(hahn 0.9.3)]]
+* [[hahn]]
 * [[htmlprag]]
 * [[http-client]]
 * [[matchable]]
@@ -200,6 +200,7 @@ BSD
 ; [[https://github.com/klutometis/twilio/releases/tag/0.2.2|0.2.2]] : Remove the dependency on setup-helper-cock.
 ; [[https://github.com/klutometis/twilio/releases/tag/0.2.3|0.2.3]] : Remove dependency on debug.
 ; [[https://github.com/klutometis/twilio/releases/tag/0.2.4|0.2.4]] : Add cock.
+; [[https://github.com/klutometis/twilio/releases/tag/0.2.5|0.2.5]] : Use hahn.
 ==== Colophon
 
 Documented by [[/egg/hahn|hahn]].
