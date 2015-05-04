@@ -42,18 +42,18 @@ The Twilio API URL
 ==== {{twilio-make-call}}
 <procedure>(twilio-make-call to #!key url application-sid method fallback-url fallback-method status-callback status-callback-method send-digits if-machine timeout record) → unspecified</procedure>
 Make a call using the Twilio API; see [[http://www.twilio.com/docs/api/rest/making-calls]].
-; to : The phone number to call
-; url : TwiML URL when the call connects
-; application-sid : Alternatively, the app containing the URL
-; method : Method to request {{url}}
-; fallback-url : Second {{url}} to try
-; fallback-method : Method to which to fall back
-; status-callback : URL to post status to
-; status-callback-method : Method to use
-; send-digits : Keys to dial after connecting
-; if-machine : Determine whether the caller is a machine
-; timeout : How long to let the phone ring
-; record : Whether to record the call
+; {{to}} : The phone number to call
+; {{url}} : TwiML URL when the call connects
+; {{application-sid}} : Alternatively, the app containing the URL
+; {{method}} : Method to request {{url}}
+; {{fallback-url}} : Second {{url}} to try
+; {{fallback-method}} : Method to which to fall back
+; {{status-callback}} : URL to post status to
+; {{status-callback-method}} : Method to use
+; {{send-digits}} : Keys to dial after connecting
+; {{if-machine}} : Determine whether the caller is a machine
+; {{timeout}} : How long to let the phone ring
+; {{record}} : Whether to record the call
 <enscript highlight="scheme">(define (twilio-make-call
          to
          #!key
@@ -93,10 +93,10 @@ Placing a call
 ==== {{twilio-send-sms}}
 <procedure>(twilio-send-sms to body #!key status-callback application-sid) → unspecified</procedure>
 Send an SMS using the Twilio API; see [[http://www.twilio.com/docs/api/rest/sending-sms]].
-; to : The number to send to
-; body : The SMS to send
-; status-callback : POST when the message is processed
-; application-sid : The application's SID
+; {{to}} : The number to send to
+; {{body}} : The SMS to send
+; {{status-callback}} : POST when the message is processed
+; {{application-sid}} : The application's SID
 <enscript highlight="scheme">(define (twilio-send-sms to body #!key status-callback application-sid)
   (let ((parameters
           `((from unquote (twilio-from))
@@ -116,22 +116,22 @@ Sending an SMS
 ==== {{twilio-write}}
 <procedure>(twilio-write response) → unspecified</procedure>
 Write STwiML as TwiML.
-; response : The STwiML response
+; {{response}} : The STwiML response
 <enscript highlight="scheme">(define twilio-write write-shtml-as-html)
 </enscript>
 ==== {{twilio-response}}
 <procedure>(twilio-response . verbs) → STwiML</procedure>
 Wrap verbs in a STwiML response; see [[http://www.twilio.com/docs/api/twiml]].
-; verbs : The verbs to wrap in a response
+; {{verbs}} : The verbs to wrap in a response
 <enscript highlight="scheme">(define (twilio-response . verbs) `(Response ,@verbs))
 </enscript>
 ==== {{twilio-say}}
 <procedure>(twilio-say text #!key voice loop language) → STwiML</procedure>
 Say something; see [[http://www.twilio.com/docs/api/twiml/say]].
-; text : The text to say
-; voice : The voice to say it in
-; loop : How many times to say it
-; language : The language to say it in
+; {{text}} : The text to say
+; {{voice}} : The voice to say it in
+; {{loop}} : How many times to say it
+; {{language}} : The language to say it in
 <enscript highlight="scheme">(define (twilio-say text #!key voice loop language)
   (let ((parameters
           (lower-camel-filter-parameters
@@ -145,8 +145,8 @@ Say something; see [[http://www.twilio.com/docs/api/twiml/say]].
 ==== {{twilio-play}}
 <procedure>(twilio-play url #!key loop) → STwiML</procedure>
 Play something; see [[http://www.twilio.com/docs/api/twiml/play]].
-; url : The audio file to play
-; loop : How many times to play it
+; {{url}} : The audio file to play
+; {{loop}} : How many times to play it
 <enscript highlight="scheme">(define (twilio-play url #!key loop)
   (let ((parameters (lower-camel-filter-parameters `((loop ,loop)))))
     (if (null? parameters)
@@ -158,12 +158,12 @@ Play something; see [[http://www.twilio.com/docs/api/twiml/play]].
 ==== {{twilio-sms}}
 <procedure>(twilio-sms text #!key to from action method status-callback) → STwiML</procedure>
 Send an SMS; see [[http://www.twilio.com/docs/api/twiml/sms]].
-; text : The text to send
-; to : The number to send it to
-; from : The number to send it from
-; action : Action URL
-; method : {{POST}} or {{GET}} for {{action}}
-; status-callback : Status callback URL
+; {{text}} : The text to send
+; {{to}} : The number to send it to
+; {{from}} : The number to send it from
+; {{action}} : Action URL
+; {{method}} : {{POST}} or {{GET}} for {{action}}
+; {{status-callback}} : Status callback URL
 <enscript highlight="scheme">(define (twilio-sms text #!key to from action method status-callback)
   (let* ((parameters
            (lower-camel-filter-parameters
@@ -174,9 +174,7 @@ Send an SMS; see [[http://www.twilio.com/docs/api/twiml/sms]].
                (status-callback ,status-callback)))))
     (if (null? parameters)
       `(Sms ,text)
-      `(Sms (,(string->symbol "@")
-             ,@(lower-camel-filter-parameters parameters))
-            ,text))))
+      `(Sms (,at ,@(lower-camel-filter-parameters parameters)) ,text))))
 </enscript>
 === About this egg
 
@@ -188,7 +186,7 @@ Send an SMS; see [[http://www.twilio.com/docs/api/twiml/sms]].
 ==== License
 BSD
 ==== Dependencies
-* [[debug]]
+* [[(hahn 0.9.3)]]
 * [[htmlprag]]
 * [[http-client]]
 * [[matchable]]
@@ -199,6 +197,9 @@ BSD
 ; [[https://github.com/klutometis/twilio/releases/tag/0.1|0.1]] : First release: calls and SMS
 ; [[https://github.com/klutometis/twilio/releases/tag/0.2|0.2]] : Some Twilio verbs
 ; [[https://github.com/klutometis/twilio/releases/tag/0.2.1|0.2.1]] : Accomodate no parameters.
+; [[https://github.com/klutometis/twilio/releases/tag/0.2.2|0.2.2]] : Remove the dependency on setup-helper-cock.
+; [[https://github.com/klutometis/twilio/releases/tag/0.2.3|0.2.3]] : Remove dependency on debug.
+; [[https://github.com/klutometis/twilio/releases/tag/0.2.4|0.2.4]] : Add cock.
 ==== Colophon
 
-Documented by [[/egg/cock|cock]].
+Documented by [[/egg/hahn|hahn]].

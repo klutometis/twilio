@@ -15,10 +15,9 @@
           data-structures
           scheme)
 
-  (require-library htmlprag)
-  (import (only htmlprag write-shtml-as-html))
-  
   (use extras
+       (only hahn at)
+       (only htmlprag write-shtml-as-html)
        http-client
        matchable
        s

@@ -5,7 +5,7 @@
  (repository "https://github.com/klutometis/twilio")
  (category net)
  (license "BSD")
- (depends cock
+ (depends (hahn "0.9.3")
           htmlprag
           http-client
           matchable
